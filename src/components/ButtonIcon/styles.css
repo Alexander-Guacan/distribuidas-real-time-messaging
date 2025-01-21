@@ -1,0 +1,13 @@
+.button-icon {
+  --bg-color: transparent;
+  padding: var(--padding-xs);
+  border: none;
+  border-radius: var(--border-radius-md);
+  background-color: var(--bg-color);
+}
+
+@media (hover: hover) {
+  .button-icon:hover {
+    --bg-color: var(--color-gray-700);
+  }
+}

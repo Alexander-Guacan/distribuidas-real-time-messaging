@@ -1,0 +1,43 @@
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--gap-xxs);
+  overflow: hidden;
+}
+
+.chat-history__header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  background-color: var(--color-gray-800);
+  padding: var(--padding-md);
+}
+
+.chat-history__nickname {
+  font-size: 0.9rem;
+}
+
+.chat-history__messages {
+  flex-grow: 1;
+  background-image: url('https://wallpapers.com/images/hd/whatsapp-chat-background-fb34cc4b2hg9lmix.jpg');
+  background-position: center;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  padding: var(--padding-sm) var(--padding-md);
+}
+
+.chat-history__footer {
+  background-color: var(--color-gray-800);
+}
+
+.chat-history__form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-history__input {
+  width: 100%;
+  background-color: transparent;
+}

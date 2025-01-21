@@ -1,0 +1,53 @@
+.message-box {
+  --bg-color: var(--color-gray-800);
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  width: fit-content;
+  background-color: var(--bg-color);
+  padding: var(--padding-sm);
+  border-top-right-radius: var(--border-radius-md);
+  border-bottom-right-radius: var(--border-radius-md);
+  border-bottom-left-radius: var(--border-radius-md);
+  transform: translateY(0);
+  transition: transform 100ms ease-in-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid var(--bg-color);
+  }
+
+  @starting-style {
+    transform: translateY(16px);
+  }
+}
+
+.message-box--sended {
+  --bg-color: var(--color-green-500);
+  align-self: flex-end;
+  border-top-left-radius: var(--border-radius-md);
+  border-top-right-radius: 0;
+
+  &::after {
+    right: 0;
+    left: 100%;
+    border-right: none;
+    border-left: 12px solid var(--bg-color);
+  }
+}
+
+.message-box--sended .message-box__nickname {
+  align-self: flex-end;
+}
+
+.message-box__nickname {
+  color: var(--color-gray-100);
+  font-size: 0.9em;
+}

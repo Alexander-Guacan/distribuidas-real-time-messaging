@@ -1,0 +1,14 @@
+.chats {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-md);
+  background-color: var(--color-gray-800);
+  gap: var(--gap-lg);
+  overflow: hidden;
+}
+
+.chats__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}

@@ -1,0 +1,9 @@
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-md);
+  height: 100%;
+  color: var(--color-gray-100);
+}

@@ -1,0 +1,80 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray-900: #212021;
+  --color-gray-800: #2d2c2d;
+  --color-gray-700: #383838;
+  --color-gray-600: #454445;
+  --color-gray-100: #c2c3c2;
+  --color-green-500: #005d4a;
+
+  --padding-lg: 32px;
+  --padding-md: 24px;
+  --padding-sm: 12px;
+  --padding-xs: 8px;
+  --padding-xxs: 4px;
+
+  --border-radius-xl: 16px;
+  --border-radius-lg: 12px;
+  --border-radius-md: 8px;
+  --border-radius-sm: 4px;
+
+  --gap-xxl: 24px;
+  --gap-xl: 20px;
+  --gap-lg: 16px;
+  --gap-md: 12px;
+  --gap-sm: 8px;
+  --gap-xs: 4px;
+  --gap-xxs: 2px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+  font-family: sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+.button {
+  color: currentColor;
+}
+
+.img {
+  max-width: 100%;
+}
+
+.input {
+  color: currentColor;
+  padding: var(--padding-sm);
+  border: none;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.scrollbar-vertical {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-600) transparent;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    cursor: pointer;
+  }
+}

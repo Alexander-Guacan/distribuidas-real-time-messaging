@@ -1,0 +1,24 @@
+.chat-card {
+  display: flex;
+  gap: var(--gap-md);
+  align-items: center;
+  padding: var(--padding-sm);
+  border-radius: var(--border-radius-sm);
+}
+
+.chat-card--selected {
+  background-color: var(--color-gray-600);
+}
+
+.chat-card__nickname {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (hover: hover) {
+  .chat-card:hover {
+    background-color: var(--color-gray-700);
+    cursor: pointer;
+  }
+}
