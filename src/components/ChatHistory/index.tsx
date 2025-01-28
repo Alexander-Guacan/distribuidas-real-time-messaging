@@ -50,7 +50,7 @@ export function ChatHistory({
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight
     }
-  }, [messages])
+  }, [messages, origin])
 
   return (
     <section className="chat-history">

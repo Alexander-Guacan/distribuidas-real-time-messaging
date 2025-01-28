@@ -24,7 +24,12 @@ export function Home() {
   return (
     <main className="home">
       <Chats users={onlineUsers} onSelect={handleChatSelect} />
-      <ChatHistory destiny={destiny} messages={chat} onSubmit={sendMessage} />
+      <ChatHistory
+        origin={user}
+        destiny={destiny}
+        messages={chat}
+        onSubmit={sendMessage}
+      />
     </main>
   )
 }

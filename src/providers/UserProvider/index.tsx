@@ -2,18 +2,12 @@ import { UserProviderProps } from './types'
 import { UserContext } from '../../contexts/UserContext'
 import { Modal } from '../../components/Modal'
 import './styles.css'
-import { FormEventHandler, useEffect, useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 import { User } from '../../types/entities'
 import { connectUser, getLastUserSession } from '../../services/user.service'
 
 export function UserProvider({ children }: UserProviderProps) {
-  const [nickname, setNickname] = useState<string>()
   const [user, setUser] = useState<User | undefined>(getLastUserSession)
-
-  useEffect(() => {
-    if (user !== undefined || !nickname) return
-    connectUser({ nickname: nickname }).then((newUser) => setUser(newUser))
-  }, [nickname, user])
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault()
@@ -25,14 +19,19 @@ export function UserProvider({ children }: UserProviderProps) {
 
     if (!nickname.length) return
 
-    setNickname(nickname)
+    connectUser({ nickname: nickname }).then((newUser) => setUser(newUser))
     event.target.reset()
   }
 
   return (
     <UserContext.Provider value={user}>
       {children}
-      <Modal title="Nickname" message="Set your nickname" open={!user}>
+      <Modal
+        title="Nickname"
+        message="Set your nickname"
+        open={!user}
+        closeDisabled
+      >
         <form className="form-nickname" onSubmit={handleSubmit}>
           <input
             className="input"

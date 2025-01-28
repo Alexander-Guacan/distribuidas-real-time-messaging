@@ -6,7 +6,7 @@ export async function connectUser({
 }: {
   nickname: User['nickname']
 }): Promise<User | undefined> {
-  const isValidNickname = nickname.length
+  const isValidNickname = nickname.length > 0
 
   if (!isValidNickname) {
     throw new Error('Invalid user name, please use different name')

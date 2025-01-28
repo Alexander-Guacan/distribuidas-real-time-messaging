@@ -19,6 +19,5 @@ export async function getMessages({
       to: origin,
     },
   ]
-  console.log(`get message from ${origin.nickname} with ${destiny.nickname}`)
   return chat
 }
