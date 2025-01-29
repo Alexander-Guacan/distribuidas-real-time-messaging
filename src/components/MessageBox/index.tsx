@@ -8,7 +8,7 @@ export function MessageBox({
 }: MessageBoxProps) {
   return (
     <p className={`message-box message-box--${sended ? 'sended' : ''}`}>
-      <span className="message-box__nickname">{user.nickname}</span>
+      <span className="message-box__nickname">{user}</span>
       {children}
     </p>
   )

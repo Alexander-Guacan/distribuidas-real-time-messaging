@@ -6,10 +6,18 @@ import { Placeholder } from '../Placeholder'
 import './styles.css'
 import { ChatsProps } from './types'
 import { ButtonIcon } from '../ButtonIcon'
+import { useChat } from '../../hooks/useChat'
+import { useUser } from '../../hooks/useUser'
+import { CHATROOM_NICKNAME } from '../../constants'
 
 export function Chats({ users, onSelect }: ChatsProps) {
   const [chatSelected, setChatSelected] = useState<User>()
   const [isShrink, setIsShrink] = useState(false)
+  const { user } = useUser()
+  const { closeConnection } = useChat({
+    origin: user,
+    destiny: { nickname: CHATROOM_NICKNAME },
+  })
 
   const handleClick = ({ user }: { user: User }) => {
     setChatSelected(user)
@@ -35,11 +43,11 @@ export function Chats({ users, onSelect }: ChatsProps) {
         <h2>Chats</h2>
         {users.length ? (
           <div className="chats__list scrollbar-vertical">
-            {users.map((user) => (
+            {users.map((user, index) => (
               <ChatCard
-                key={user.id}
+                key={index}
                 user={user}
-                selected={user.id === chatSelected?.id}
+                selected={user.nickname === chatSelected?.nickname}
                 onClick={() => handleClick({ user })}
               />
             ))}
@@ -48,6 +56,12 @@ export function Chats({ users, onSelect }: ChatsProps) {
           <Placeholder icon={Icon.USER_OFFLINE} message="No users online" />
         )}
       </div>
+      <ButtonIcon
+        className=""
+        icon={Icon.EXIT}
+        title="disconnect"
+        onClick={closeConnection}
+      />
     </section>
   )
 }

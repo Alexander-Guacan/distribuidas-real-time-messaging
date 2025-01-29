@@ -9,6 +9,8 @@ export type ChatHistoryEventHandler = ({
 export interface ChatHistoryProps {
   origin?: User
   destiny?: User
-  messages: Message[]
-  onSubmit?: ChatHistoryEventHandler
+  publicChat: Message[]
+  privateChat: Message[]
+  onPublicSubmit?: ChatHistoryEventHandler
+  onPrivateSubmit?: ChatHistoryEventHandler
 }

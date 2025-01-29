@@ -1,11 +1,11 @@
 import { User } from '../types/entities'
 const USER_STORAGE_KEY = 'user'
 
-export async function connectUser({
+export function saveSession({
   nickname,
 }: {
   nickname: User['nickname']
-}): Promise<User | undefined> {
+}): User {
   const isValidNickname = nickname.length > 0
 
   if (!isValidNickname) {
@@ -13,7 +13,6 @@ export async function connectUser({
   }
 
   const newUser: User = {
-    id: 1,
     nickname: nickname,
   }
 
@@ -32,19 +31,6 @@ export function getLastUserSession(): User | undefined {
 }
 
 export async function getOnlineUsers(): Promise<User[]> {
-  const onlineUsers: User[] = [
-    {
-      id: 2,
-      nickname: 'camila',
-    },
-    {
-      id: 3,
-      nickname: 'luis',
-    },
-    {
-      id: 4,
-      nickname: 'nando',
-    },
-  ]
+  const onlineUsers: User[] = []
   return onlineUsers
 }

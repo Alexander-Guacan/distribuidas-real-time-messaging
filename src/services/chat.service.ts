@@ -7,17 +7,6 @@ export async function getMessages({
   origin: User
   destiny: User
 }): Promise<Message[]> {
-  const chat: Message[] = [
-    {
-      content: 'hola',
-      from: origin,
-      to: destiny,
-    },
-    {
-      content: 'hola',
-      from: destiny,
-      to: origin,
-    },
-  ]
+  const chat: Message[] = []
   return chat
 }

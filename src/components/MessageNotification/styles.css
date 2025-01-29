@@ -1,0 +1,9 @@
+.message-notification {
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-100);
+  padding: var(--padding-sm);
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+}

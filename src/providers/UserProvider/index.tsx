@@ -4,7 +4,7 @@ import { Modal } from '../../components/Modal'
 import './styles.css'
 import { FormEventHandler, useState } from 'react'
 import { User } from '../../types/entities'
-import { connectUser, getLastUserSession } from '../../services/user.service'
+import { getLastUserSession, saveSession } from '../../services/user.service'
 
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User | undefined>(getLastUserSession)
@@ -19,7 +19,12 @@ export function UserProvider({ children }: UserProviderProps) {
 
     if (!nickname.length) return
 
-    connectUser({ nickname: nickname }).then((newUser) => setUser(newUser))
+    const newUser = {
+      nickname,
+    }
+
+    setUser(newUser)
+    saveSession(newUser)
     event.target.reset()
   }
 

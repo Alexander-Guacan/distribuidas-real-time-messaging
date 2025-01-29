@@ -1,6 +1,5 @@
 import { Chats } from '../../components/Chats'
 import { ChatsEventHandler } from '../../components/Chats/types'
-import { useOnlineUsers } from '../../hooks/useOnlineUsers'
 import { ChatHistory } from '../../components/ChatHistory'
 import './styles.css'
 import { useChat } from '../../hooks/useChat'
@@ -11,8 +10,13 @@ import { User } from '../../types/entities'
 export function Home() {
   const [destiny, setDestiny] = useState<User>()
   const { user } = useUser()
-  const { onlineUsers } = useOnlineUsers()
-  const { chat, sendMessage } = useChat({
+  const {
+    sendPrivateMessage,
+    sendPublicMessage,
+    publicChat,
+    privateChats,
+    onlineUsers,
+  } = useChat({
     origin: user,
     destiny: destiny,
   })
@@ -27,8 +31,10 @@ export function Home() {
       <ChatHistory
         origin={user}
         destiny={destiny}
-        messages={chat}
-        onSubmit={sendMessage}
+        publicChat={publicChat}
+        privateChat={privateChats}
+        onPublicSubmit={sendPublicMessage}
+        onPrivateSubmit={sendPrivateMessage}
       />
     </main>
   )

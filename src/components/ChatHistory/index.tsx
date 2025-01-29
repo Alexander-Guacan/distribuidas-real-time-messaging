@@ -4,24 +4,31 @@ import { ImageIcon } from '../ImageIcon'
 import { ButtonIcon } from '../ButtonIcon'
 import { Icon } from '../../enums/Icon'
 import './styles.css'
-import { FormEventHandler, useEffect, useRef } from 'react'
+import { FormEventHandler, useEffect, useRef, useState } from 'react'
 import { Message } from '../../types/entities'
 import { MessageBox } from '../MessageBox'
 import { Placeholder } from '../Placeholder'
+import { MessageStatus } from '../../enums/MessageStatus'
+import { CHATROOM_NICKNAME } from '../../constants'
+import { MessageNotification } from '../MessageNotification'
 
 export function ChatHistory({
   origin,
   destiny,
-  messages,
-  onSubmit,
+  publicChat,
+  privateChat,
+  onPublicSubmit,
+  onPrivateSubmit,
 }: ChatHistoryProps) {
   const chatRef = useRef<HTMLDivElement | null>(null)
+  const [filteredMessages, setFilteredMessages] = useState<Message[]>([])
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault()
 
     if (
-      !onSubmit ||
+      !onPublicSubmit ||
+      !onPrivateSubmit ||
       !origin ||
       !destiny ||
       !(event.target instanceof HTMLFormElement)
@@ -34,14 +41,18 @@ export function ChatHistory({
     if (!formMessage.length) return
 
     const message: Message = {
-      from: origin,
-      to: destiny,
-      content: formMessage,
+      senderName: origin.nickname,
+      receiverName: destiny.nickname,
+      message: formMessage,
+      status: MessageStatus.MESSAGE,
+      date: new Date(Date.now()),
     }
 
-    onSubmit({
-      message: message,
-    })
+    if (destiny.nickname === CHATROOM_NICKNAME) {
+      onPublicSubmit({ message: message })
+    } else {
+      onPrivateSubmit({ message: message })
+    }
 
     event.target.reset()
   }
@@ -50,7 +61,27 @@ export function ChatHistory({
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight
     }
-  }, [messages, origin])
+  }, [filteredMessages])
+
+  useEffect(() => {
+    if (destiny?.nickname === CHATROOM_NICKNAME) {
+      setFilteredMessages(
+        publicChat.filter(
+          (message) => message.receiverName === CHATROOM_NICKNAME,
+        ),
+      )
+    } else {
+      setFilteredMessages(
+        privateChat.filter(
+          (message) =>
+            (message.senderName === origin?.nickname ||
+              message.senderName === destiny?.nickname) &&
+            (message.receiverName === origin?.nickname ||
+              message.receiverName === destiny?.nickname),
+        ),
+      )
+    }
+  }, [destiny, origin, privateChat, publicChat])
 
   return (
     <section className="chat-history">
@@ -64,15 +95,22 @@ export function ChatHistory({
             className="chat-history__messages scrollbar-vertical"
             ref={chatRef}
           >
-            {messages.map((message, index) => (
-              <MessageBox
-                user={message.from}
-                key={index}
-                sended={message.from.id === origin.id}
-              >
-                {message.content}
-              </MessageBox>
-            ))}
+            {filteredMessages.map((message, index) =>
+              message.status === MessageStatus.LEAVE ? (
+                <MessageNotification
+                  key={index}
+                  message={`El usuario ${message.senderName} se ha desconectado`}
+                />
+              ) : (
+                <MessageBox
+                  user={message.senderName}
+                  key={index}
+                  sended={message.senderName === origin.nickname}
+                >
+                  {message.message}
+                </MessageBox>
+              ),
+            )}
           </div>
           <footer className="chat-history__footer">
             <form className="chat-history__form" onSubmit={handleSubmit}>

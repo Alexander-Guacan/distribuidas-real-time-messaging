@@ -1,10 +1,13 @@
+import { MessageStatus } from '../enums/MessageStatus'
+
 export interface User {
-  id: number
   nickname: string
 }
 
 export interface Message {
-  from: User
-  to: User
-  content: string
+  senderName: User['nickname']
+  receiverName: User['nickname']
+  message: string
+  status: MessageStatus
+  date: Date
 }

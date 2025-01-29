@@ -5,4 +5,5 @@ export enum Icon {
   CHAT,
   CLOSE,
   MENU,
+  EXIT,
 }
