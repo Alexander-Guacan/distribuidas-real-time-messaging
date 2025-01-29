@@ -4,4 +4,5 @@ export enum Icon {
   SUBMIT,
   CHAT,
   CLOSE,
+  MENU,
 }

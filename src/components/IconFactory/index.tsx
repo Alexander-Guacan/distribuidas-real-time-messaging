@@ -2,7 +2,7 @@ import { FaUser, FaUserSlash } from 'react-icons/fa'
 import { Icon } from '../../enums/Icon'
 import './styles.css'
 import { IconFactoryProps } from './types'
-import { IoMdCloseCircle, IoMdSend } from 'react-icons/io'
+import { IoMdCloseCircle, IoMdMenu, IoMdSend } from 'react-icons/io'
 import { IoChatboxOutline } from 'react-icons/io5'
 import { GrStatusUnknown } from 'react-icons/gr'
 
@@ -22,6 +22,9 @@ export function IconFactory({ name }: IconFactoryProps) {
 
     case Icon.CLOSE:
       return <IoMdCloseCircle className="icon" />
+
+    case Icon.MENU:
+      return <IoMdMenu className="icon" />
 
     default:
       return <GrStatusUnknown className="icon" />

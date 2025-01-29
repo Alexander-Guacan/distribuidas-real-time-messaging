@@ -12,3 +12,30 @@
   flex-direction: column;
   gap: var(--gap-xs);
 }
+
+.chats__menu {
+  display: none;
+}
+
+@media (width < 720px) {
+  .chats {
+    padding: var(--padding-md) var(--padding-xs);
+  }
+
+  .chats__body {
+    display: none;
+  }
+
+  .chats__menu {
+    display: block;
+  }
+
+  .chats--shrink {
+    padding: var(--padding-md);
+
+    .chats__body {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
